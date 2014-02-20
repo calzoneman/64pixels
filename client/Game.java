@@ -1166,52 +1166,12 @@ implements MouseListener, MouseMotionListener, KeyListener, ComponentListener, F
 				case 1: {
 					multiplayer = true;
 					boolean doCustom = true;
-					KickScreen cks = new KickScreen(canvas,"Loading serverlist...");
-					cks.mName="DON'T PANIC";
-					cks.bgcolor = 0x808080;
-					canvas.cs = (Screen) cks;
-					canvas.draw(mx,my);
-					System.out.print("fetching... ");
-					if(fetchSList())
-					{
-						System.out.println("fetched!");
-						doCustom=false; // for now
-						Config csl = new Config();
-						csl.load(map.saveDir + "slist.txt");
-						// by now csl stores the serverlist D:
-						String[] csll = new String[csl.keys+2];
-						csll[0]="Custom address";
-						for(int i=1;i<=csl.keys;i++)
-						{
-							csll[i]=escapeSlashes(csl.keyo[i-1]);
-						}
-						csll[csll.length-1]="<- Back";
-						screen = new OptionScreen(canvas,"Choose server");
-						screen.addStrings(csll);
-						canvas.cs= (Screen)screen;
-						loopScreen();
-						if(screen.inSel==0) doCustom=true;
-						else if(screen.inSel==(csll.length-1)) { inconf = true; break; }
-						else ostr=csl.value[screen.inSel-1];
-					}
-					else
-					{
-						System.out.println("not fetched (probably means glados)");
-						cks.bgcolor = 0xAA0000;
-						cks.mName="SERVERLIST NOT FOUND";
-						cks.name="PLEASE DON'T PANIC, ONE SECOND...";
-						canvas.draw(mx,my);
-						try{Thread.sleep(1800);}catch(Exception e){}
-					}
-					if(doCustom)
-					{
-						TextInputScreen aScreen = new TextInputScreen(canvas,"Input address:");
-						aScreen.minLen=0;
-						aScreen.maxLen=60;
-						canvas.cs = (Screen)aScreen;
-						loopScreen();
-						ostr = aScreen.inString;
-					}
+					TextInputScreen aScreen = new TextInputScreen(canvas,"Input address:");
+					aScreen.minLen=0;
+					aScreen.maxLen=60;
+					canvas.cs = (Screen)aScreen;
+					loopScreen();
+					ostr = aScreen.inString;
 					TextInputScreen nScreen = new TextInputScreen(canvas,"Enter nickname:");
 					nScreen.minLen=1;
 					nScreen.maxLen=16;

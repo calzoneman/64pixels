@@ -46,6 +46,7 @@ public class Net implements Runnable, NetShim
 	{
 		try
 		{
+			System.out.println("Connecting to " + host + ":" + port);
 			socket = new Socket(host,port);
 			while(!socket.isConnected())
 			{
@@ -58,9 +59,13 @@ public class Net implements Runnable, NetShim
 			ns = new NetSender(socket.getOutputStream());
 			Thread tns = new Thread(ns);
 			tns.start();
+		} catch(ConnectException e) {
+			System.out.println("Connection Refused!  The server is probably down.");
+			System.exit(1);
 		} catch(Exception e)
 		{
 			System.out.println("Fatal Net error!");
+			e.printStackTrace();
 			System.exit(1);
 		}
 	}

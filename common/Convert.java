@@ -15,16 +15,16 @@ public final class Convert
 			{
 				String tmp = hn.substring(splitter+1,hn.length());
 				int test = new Integer(tmp).intValue();
-				if(test<=0 || test>32767) test=20064;
+				if(test<=0 || test>32767) test=25566;
 				return test;
 			}
-			else return 20064;
+			else return 25566;
 		}
 		catch(Exception e)
 		{
 			System.out.println("getPort error!");
 			e.printStackTrace();
-			return 20064;
+			return 25566;
 		}
 	}
 	public static final String getHost(String hn)

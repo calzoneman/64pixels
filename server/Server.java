@@ -36,7 +36,7 @@ public class Server extends ServerShim
 	public boolean opPassOn = false;
 	public String opPass;
 	public Warps warps;
-	public int po = 20064;
+	public int po = 25566;
 	public boolean mapLock = false;
 	public World world;
 	public PluginHandler pluginHandler;
@@ -1233,8 +1233,7 @@ public class Server extends ServerShim
 	public void start()
 	{
 		System.out.println("64px-srvr version " + Version.getVersionName());
-		System.out.println("Svetlana, I'm sorry.");
-		System.out.println("Also let's create servers with Haruhi Suzumiya! (yeah, haruhiism plug FTW)");
+		System.out.println("Modifications by calzoneman");
 		System.out.print("Initializing: #");
 		run = true;
 		ci = new Input(this);
@@ -1246,9 +1245,9 @@ public class Server extends ServerShim
 		Thread ti2 = new Thread(cas);
 		ti2.start();
 		System.out.print("#");
-		Thread ti4 = new Thread(new HeartThread(this));
-		if(privmode==0) ti4.start();
-		System.out.print("#");
+		//Thread ti4 = new Thread(new HeartThread(this));
+		//if(privmode==0) ti4.start();
+		//System.out.print("#");
 		System.out.println("READY!");
 		while(run)
 		{
@@ -1279,6 +1278,7 @@ public class Server extends ServerShim
 			catch(Exception e)
 			{
 				System.out.println("Fatal Server loop error!");
+				e.printStackTrace();
 				System.exit(1);
 			}
 		}
